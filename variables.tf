@@ -1,9 +1,7 @@
-variable "repo_name" {
-  type    = string
-  default = "video-repo"
+variable "aws_region" {
+  default = "ap-south-1"
 }
 
-variable "codebuild_project_name" {
-  type    = string
-  default = "demo-codebuild"
+variable "bucket_name" {
+  default = "project29-terraform-s3-bucket"
 }
