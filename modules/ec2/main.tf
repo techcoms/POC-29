@@ -22,7 +22,7 @@ resource "aws_security_group" "ec2_sg" {
 
 resource "aws_instance" "this" {
   ami           = "ami-03f4878755434977f" # Amazon Linux 2 (ap-south-1)
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   subnet_id     = var.subnet_id
   security_groups = [aws_security_group.ec2_sg.id]
 
