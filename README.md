@@ -152,18 +152,6 @@ terraform apply -auto-approve
 
 ---
 
-## ⚠️ Common Issues & Fixes
-
-### ❌ EC2 Free Tier Error
-
-```
-InvalidParameterCombination: instance type not eligible
-```
-
-✅ **Fix**: Use `t2.micro`
-
----
-
 ### ❌ Backend AccessDenied
 
 ```
@@ -175,47 +163,6 @@ AccessDenied: s3:ListBucket
 * `s3:ListBucket`
 * `s3:GetObject`
 * `s3:PutObject`
-
----
-
-## 🔁 Importing Manually Created EC2 into Terraform
-
-Terraform does **not auto-detect existing resources**.
-
-### Step 1: Write matching Terraform resource
-
-```hcl
-resource "aws_instance" "this" {
-  ami           = "ami-03f4878755434977f"
-  instance_type = "t2.micro"
-  subnet_id     = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-}
-```
-
-### Step 2: Remove existing state entry (if needed)
-
-```bash
-terraform state rm module.ec2.aws_instance.this
-```
-
-### Step 3: Import the EC2 instance
-
-```bash
-terraform import module.ec2.aws_instance.this i-0dde13244930b11cb
-```
-
-### Step 4: Verify
-
-```bash
-terraform plan
-```
-
-Expected:
-
-```
-No changes. Infrastructure is up-to-date.
-```
 
 ---
 
